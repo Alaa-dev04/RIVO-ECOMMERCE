@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
+import Footer from "../shared/websiteshared/footer";
+import Navbar from "@/components/shared/websiteshared/navbar";
 export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -21,7 +23,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <NuqsAdapter>
       {/* <SessionProvider> */}
         <QueryClientProvider client={queryClient}>
-          {children}
+          <Navbar/>
+          {children }
+          <Footer />
           <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
