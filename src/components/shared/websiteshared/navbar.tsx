@@ -25,7 +25,7 @@ const categories = [
 
 const Navbar = () => {
   return (
-    <header className="w-full border-b bg-background">
+    <header className="w-full  bg-background">
       <div className="max-w-7xl mx-auto flex items-center gap-4 px-6 lg:px-10 py-3">
         {/* Logo */}
         <Link href="/" className="text-xl font-extrabold tracking-tight shrink-0">
