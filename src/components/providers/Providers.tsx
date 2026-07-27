@@ -7,8 +7,11 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
+import Footer from "../shared/websiteshared/footer";
+import Navbar from "@/components/shared/websiteshared/navbar";
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const quaryClient = new QueryClient({
+  const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         placeholderData: keepPreviousData,
@@ -18,12 +21,15 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <NuqsAdapter>
-      <SessionProvider>
-        <QueryClientProvider client={quaryClient}>
-          {children}
+      {/* <SessionProvider> */}
+        <QueryClientProvider client={queryClient}>
+          <Navbar/>
+          {children }
+          <Footer />
+          <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-      </SessionProvider>
+      {/* </SessionProvider> */}
     </NuqsAdapter>
   );
 }

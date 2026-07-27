@@ -45,13 +45,13 @@ const HeroSection = () => {
         </CardContent>
       </Card>
       {/* three cards section */}
-      <div className="grid grid-cols-1 lg:grid-cols-[312px_312px_minmax(0,1fr)] gap-5 p-5">
+      <div className="grid grid-cols-3 lg:grid-cols-[312px_312px_minmax(0,1fr)] gap-5 p-5">
         <Image
           src="/shooose.png"
           alt="shoes"
           width={312}
           height={328}
-          className="w-full h-[260px] sm:h-[320px] object-cover rounded-2xl"
+          className="w-full h-[260px] sm:h-[320px] md:h-[379px] object-cover rounded-2xl"
         />
 
         <Image
@@ -59,7 +59,7 @@ const HeroSection = () => {
           alt="sunblock"
           width={312}
           height={328}
-          className="w-full h-[260px] sm:h-[320px] object-cover rounded-2xl"
+          className="w-full h-[260px] md:h-[379px] sm:h-[320px] object-cover rounded-2xl"
         />
 
         <Image
@@ -67,7 +67,7 @@ const HeroSection = () => {
           alt="laptop"
           width={563}
           height={328}
-          className="w-full max-w-[900px] h-[260px] sm:h-[320px] object-cover rounded-2xl"
+          className="w-full max-w-[900px] h-[260px] md:h-[379px] sm:h-[320px] object-cover rounded-2xl"
         />
       </div>
     </div>
