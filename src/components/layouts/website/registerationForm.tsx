@@ -8,19 +8,21 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 const RegistrationForm = () => {
   const { form, onSubmit, isPending } = useRegister();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [phone, setPhone] = useState("");
   const errors = form.formState.errors;
 
   return (
     <div className="w-full max-w-[500px] mx-auto  py-3">
-
       {/* Social buttons + divider, now their own component */}
 
-    {/* Divider */}
+      {/* Divider */}
       <div className="flex items-center gap-3 mb-4 w-full">
         <div className="h-px flex-1 bg-border" />
         <span className="text-xs text-muted-foreground whitespace-nowrap">
@@ -28,7 +30,11 @@ const RegistrationForm = () => {
         </span>
         <div className="h-px flex-1 bg-border" />
       </div>
-      <form onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-5"
+      >
         {/* First / Last name */}
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
@@ -75,7 +81,6 @@ const RegistrationForm = () => {
               id="email"
               type="email"
               placeholder="you@example.com"
-              
               className="pl-9 bg-[#F8F8F8] py-5"
               {...form.register("email")}
             />
@@ -91,14 +96,26 @@ const RegistrationForm = () => {
             Phone Number <span className="text-orange-500">*</span>
           </label>
           <div className="relative">
-            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
+            {/* <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" /> */}
+            {/* <Input
               id="phone"
               type="tel"
 
               placeholder="+966  -  5X XXX XXXX"
-              className="pl-9 bg-[#F8F8F8] py-5  "
+              
               {...form.register("phone")}
+            /> */}
+            <PhoneInput
+              defaultCountry="sa"
+              value={phone}
+              onChange={(phone) => {
+                setPhone(phone);
+                form.setValue("phone", phone, {
+                  shouldValidate: true,
+                });
+              }}
+              style={{ width: "400px" }}
+              className="phone-input"
             />
           </div>
           <p className="text-xs text-muted-foreground">
@@ -129,7 +146,11 @@ const RegistrationForm = () => {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
               tabIndex={-1}
             >
-              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              {showPassword ? (
+                <EyeOff className="w-4 h-4" />
+              ) : (
+                <Eye className="w-4 h-4" />
+              )}
             </button>
           </div>
           {errors.password && (
@@ -157,11 +178,17 @@ const RegistrationForm = () => {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
               tabIndex={-1}
             >
-              {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              {showConfirmPassword ? (
+                <EyeOff className="w-4 h-4" />
+              ) : (
+                <Eye className="w-4 h-4" />
+              )}
             </button>
           </div>
           {errors.confirmPassword && (
-            <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>
+            <p className="text-xs text-red-500">
+              {errors.confirmPassword.message}
+            </p>
           )}
         </div>
 
@@ -172,11 +199,16 @@ const RegistrationForm = () => {
               id="terms"
               checked={form.watch("terms")}
               onCheckedChange={(checked) =>
-                form.setValue("terms", checked === true, { shouldValidate: true })
+                form.setValue("terms", checked === true, {
+                  shouldValidate: true,
+                })
               }
               className="mt-0.5"
             />
-            <label htmlFor="terms" className="text-sm text-muted-foreground leading-snug">
+            <label
+              htmlFor="terms"
+              className="text-sm text-muted-foreground leading-snug"
+            >
               I agree to Market's{" "}
               <Link href="/terms" className="text-[#F97316] hover:underline">
                 Terms of Service
@@ -206,7 +238,10 @@ const RegistrationForm = () => {
       {/* Sign in link */}
       <p className="text-center text-sm text-muted-foreground mt-4">
         Already have an account?{" "}
-        <Link href="/login/email" className="text-[#F97316] font-medium hover:underline">
+        <Link
+          href="/login/email"
+          className="text-[#F97316] font-medium hover:underline"
+        >
           Sign in
         </Link>
       </p>

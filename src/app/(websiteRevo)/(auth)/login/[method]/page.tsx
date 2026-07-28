@@ -10,7 +10,7 @@ const Login = () => {
       <SocialLoginButtons/>
         <p className="text-center text-sm text-muted-foreground mt-4">
         Don't have an account? 
-        <Link href="/login/email" className="text-[#F97316] font-medium hover:underline">
+        <Link href="/register" className="text-[#F97316] font-medium hover:underline">
           Create account
         </Link>
       </p>
