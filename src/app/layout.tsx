@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Providers from "@/components/providers/Providers";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,8 +35,9 @@ export default function RootLayout({
       lang="en"
       className={poppins.variable}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex  flex-col">
         <Providers>
+          
           {children}
         </Providers>
       </body>
