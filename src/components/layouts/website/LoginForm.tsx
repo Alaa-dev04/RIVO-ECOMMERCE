@@ -1,19 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { Mail, Phone, Lock, ArrowRight, LogIn } from "lucide-react";
+import { Mail, Lock, LogIn, Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from 'react';
+import { PhoneInput } from 'react-international-phone';
 
 import useLogin from "@/hooks/useLogin";
 
 const LoginPage = () => {
-  const params = useParams<{ method: string }>();
-  const method = params.method === "phone" ? "phone" : "email"; // fallback to "email"
-
   const { form, onSubmit, isPending } = useLogin();
+  const [showPassword, setShowPassword] = useState(false);
+  const [phone, setPhone] = useState('');
   const errors = form.formState.errors;
 
   return (
@@ -26,76 +26,29 @@ const LoginPage = () => {
         </p>
       </div>
 
-      {/* Tabs, driven by URL */}
-      <div className="grid grid-cols-2 gap-1 bg-muted rounded-lg p-1 mb-6">
-        <Link
-          href="/login/email"
-          className={`flex items-center justify-center gap-2 h-9 rounded-md text-sm font-medium transition-colors ${
-            method === "email"
-              ? "bg-background shadow-sm"
-              : "text-muted-foreground"
-          }`}
-        >
-          <Mail className="w-4 h-4" />
-          Email
-        </Link>
-        <Link
-          href="/login/phone"
-          className={`flex items-center justify-center gap-2 h-9 rounded-md text-sm font-medium transition-colors ${
-            method === "phone"
-              ? "bg-background shadow-sm"
-              : "text-muted-foreground"
-          }`}
-        >
-          <Phone className="w-4 h-4" />
-          Phone
-        </Link>
-      </div>
-
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {/* Conditional field based on the URL segment */}
-        {method === "email" ? (
-          <div className="space-y-1.5">
-            <label htmlFor="email" className="text-sm font-medium">
-              Email Address <span className="text-orange-500">*</span>
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                className="pl-9 py-5 mt-2 bg-[#F8F8F8]"
-                {...form.register("email")}
-              />
-            </div>
-            {errors.email && (
-              <p className="text-xs text-red-500">{errors.email.message}</p>
-            )}
-          </div>
-        ) : (
-          <div className="space-y-1.5">
-            <label htmlFor="phone" className="text-sm font-medium">
-              Phone Number <span className="text-orange-500">*</span>
-            </label>
-            <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="+966  -  5X XXX XXXX"
-                className="pl-9 py-5 mt-2 bg-[#F8F8F8]"
-                {...form.register("phone")}
-              />
-            </div>
-            {errors.phone && (
-              <p className="text-xs text-red-500">{errors.phone.message}</p>
-            )}
-          </div>
-        )}
-
-        {/* Password stays the same either way */}
+        {/* Email */}
         <div className="space-y-1.5">
+          <label htmlFor="email" className="text-sm font-medium">
+            Email Address <span className="text-orange-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              className="pl-9 py-5 mt-2 bg-[#F8F8F8]"
+              {...form.register("email")}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-xs text-red-500">{errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Password */}
+             <div className="space-y-1.5 ">
           <label htmlFor="password" className="text-sm font-medium">
             Password <span className="text-orange-500">*</span>
           </label>
@@ -103,11 +56,19 @@ const LoginPage = () => {
             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               id="password"
-              type="password"
-              placeholder="Enter your password"
-              className="pl-9 py-5 mt-2 bg-[#F8F8F8]"
+              type={showPassword ? "text" : "password"}
+              placeholder="Create a strong password"
+              className="pl-9 pr-9 bg-[#F8F8F8] py-5 my-1"
               {...form.register("password")}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((p) => !p)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              tabIndex={-1}
+            >
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
           </div>
           {errors.password && (
             <p className="text-xs text-red-500">{errors.password.message}</p>
@@ -125,12 +86,13 @@ const LoginPage = () => {
                 form.setValue("rememberMe", checked === true)
               }
             />
-            <label htmlFor="remember" className=" text-muted-foreground">
+            <label htmlFor="remember" className="text-muted-foreground">
               Remember me
             </label>
           </div>
+
           <Link
-            href="/forgot-password"
+            href="/forgetpassword"
             className="text-sm text-[#F97316] hover:underline"
           >
             Forgot password?
@@ -147,12 +109,11 @@ const LoginPage = () => {
           {isPending ? "Signing in..." : "Sign In"}
         </Button>
       </form>
+
       {/* Divider */}
       <div className="flex items-center gap-3 my-7 w-full">
         <div className="h-px flex-1 bg-border" />
-        <span className="text-xs text-muted-foreground whitespace-nowrap">
-          or 
-        </span>
+        <span className="text-xs text-muted-foreground">or</span>
         <div className="h-px flex-1 bg-border" />
       </div>
     </div>
