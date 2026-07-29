@@ -21,7 +21,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <NuqsAdapter>
-      {/* <SessionProvider> */}
+      <SessionProvider>
         <QueryClientProvider client={queryClient}>
           <Navbar/>
           {children }
@@ -29,7 +29,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-      {/* </SessionProvider> */}
+      </SessionProvider>
     </NuqsAdapter>
   );
 }

@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { LoginSchema, LoginSchemaType } from "@/zod/login";
-
+import { signIn } from "next-auth/react";
 const useLogin = () => {
   const router = useRouter();
 
