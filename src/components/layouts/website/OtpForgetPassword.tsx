@@ -84,16 +84,16 @@ const VerifyEmailPage = () => {
   const userEmail = "you@example.com"; // TODO: pass real email via query param/context
 
   return (
-    <div className="w-full mx-auto px-6 py-8">
+    <div className="max-w-[1280px] mx-auto px-6 py-8">
       {/* Back link */}
       <Link
-        href="/login/email"
+        href="/forgetpassword"
         className="inline-flex items-center gap-2  text-muted-foreground hover:text-foreground transition-colors mb-4"
       >
         <ArrowLeft size={20} />
         Back
       </Link>
-      <div className="w-full flex flex-col justify-center items-center">
+      <div className="w-full flex flex-col justify-center items-center mt-10">
         <div className=" max-w-[575px]">
           {" "}
           {/* Header */}

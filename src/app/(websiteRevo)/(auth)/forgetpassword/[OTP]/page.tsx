@@ -2,7 +2,7 @@ import React from 'react'
 import VerifyEmailPage from '@/components/layouts/website/OtpForgetPassword'
 const OtpPage = () => {
   return (
-    <div>
+    <div className=''>
       <VerifyEmailPage/>
     </div>
   )

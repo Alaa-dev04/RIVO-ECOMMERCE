@@ -4,7 +4,7 @@ import Image from "next/image";
 import { MoveRight } from "lucide-react";
 const HeroSection = () => {
   return (
-    <div className="m-7 flex flex-col ">
+    <div className="m-7 flex flex-col max-w-[1280px] m-auto">
       <Card className="bg-linear-to-r from-[#C8BCAE] via-[#D7CCBF] to-[#F3E9DF]">
         <CardContent className="relative w-full h-[481px] p-0 flex flex-col items-center justify-center px-12 md:px-20">
           {/* this is multible headphone section  */}
@@ -45,7 +45,7 @@ const HeroSection = () => {
         </CardContent>
       </Card>
       {/* three cards section */}
-      <div className="grid grid-cols-3 lg:grid-cols-[312px_312px_minmax(0,1fr)] gap-5 p-5">
+      <div className="max-w-[1280px] m-auto grid grid-cols-3 lg:grid-cols-[312px_312px_minmax(0,1fr)] gap-5 mt-5">
         <Image
           src="/shooose.png"
           alt="shoes"

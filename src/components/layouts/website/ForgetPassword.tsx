@@ -78,7 +78,7 @@ const ForgotPasswordPage = () => {
   ];
 
   return (
-    <div className="w-full  mx-auto px-6 py-8">
+    <div className="max-w-[1280px] mx-auto px-6 py-8">
       {/* Back link */}
       <Link
         href="/login/email"

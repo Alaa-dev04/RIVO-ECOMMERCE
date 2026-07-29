@@ -12,10 +12,8 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    
-    <footer className="w-full  bg-background m-7">
-    
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+    <footer className="max-w-[1280px] m-auto  bg-background">
+      <div className="max-w-7xl mx-auto px-6 lg:px-0 py-12">
         <Separator className="my-10" />
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand block */}
@@ -24,8 +22,8 @@ const Footer = () => {
               RIVO<span className="text-orange-500">'</span>
             </h2>
             <p className="text-sm text-muted-foreground max-w-[300px]">
-              Your trusted online marketplace. Millions of products,
-              delivered fast.
+              Your trusted online marketplace. Millions of products, delivered
+              fast.
             </p>
             <div className="flex gap-2 pt-1">
               {storeBadges.map((badge) => (
@@ -33,7 +31,6 @@ const Footer = () => {
                   key={badge.label}
                   variant="outline"
                   size="sm"
-                
                   className="rounded-lg p-3"
                 >
                   <Link href={badge.href} target="_blank">

@@ -6,7 +6,7 @@ import Link from "next/link";
 const BrowseByCat = () => {
   return (
     <>
-      <div  className="p-4 md:p-6 lg:p-9">
+      <div className="pt-4 md:pt-6 max-w-[1280px] m-auto">
         {/* catogory hed dev */}
         <div className="flex flex-row justify-between ">
           {" "}

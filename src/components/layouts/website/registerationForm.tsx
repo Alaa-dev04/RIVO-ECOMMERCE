@@ -7,7 +7,7 @@ import useRegister from "@/hooks/useRegister";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-
+import { Controller } from "react-hook-form";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 
@@ -15,11 +15,10 @@ const RegistrationForm = () => {
   const { form, onSubmit, isPending } = useRegister();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [phone, setPhone] = useState("");
   const errors = form.formState.errors;
 
   return (
-    <div className="w-full max-w-[500px] mx-auto  py-3">
+    <div className="w-full max-w-[500px] mx-auto py-3 px-4 sm:px-0">
       {/* Social buttons + divider, now their own component */}
 
       {/* Divider */}
@@ -36,7 +35,7 @@ const RegistrationForm = () => {
         className="space-y-5"
       >
         {/* First / Last name */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="space-y-1.5">
             <label htmlFor="firstName" className="text-sm font-medium">
               First Name <span className="text-orange-500">*</span>
@@ -105,17 +104,34 @@ const RegistrationForm = () => {
               
               {...form.register("phone")}
             /> */}
-            <PhoneInput
-              defaultCountry="sa"
-              value={phone}
-              onChange={(phone) => {
-                setPhone(phone);
-                form.setValue("phone", phone, {
-                  shouldValidate: true,
-                });
-              }}
-              style={{ width: "400px" }}
-              className="phone-input"
+            <Controller
+              name="phone"
+              control={form.control}
+              render={({ field }) => (
+                <PhoneInput
+                  defaultCountry="sa"
+                  value={field.value}
+                  onChange={field.onChange}
+                  style={{ width: "100%" }}
+                  className="phone-input"
+                 inputClassName="w-full "
+                 inputStyle={
+                  {
+                    background:"#f8f8f8",
+                    height:"40px",
+                    borderRadius:"0 10px 10px 0",
+                    width:"100%"
+                  }
+                 }
+                 countrySelectorStyleProps={{
+                  buttonStyle:{
+                    backgroundColor:"#f8f8f8",
+                    width:"60px",
+                    height:"40px",
+                  }
+                 }}
+                />
+              )}
             />
           </div>
           <p className="text-xs text-muted-foreground">
