@@ -1,4 +1,4 @@
-export interface CategoryData {
+export type CategoryData = {
   id: number;
   title: string;
   itemCount: string;
