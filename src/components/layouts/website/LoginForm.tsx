@@ -6,14 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from 'react';
-import { PhoneInput } from 'react-international-phone';
-
 import useLogin from "@/hooks/useLogin";
 
 const LoginPage = () => {
   const { form, onSubmit, isPending } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
-  const [phone, setPhone] = useState('');
   const errors = form.formState.errors;
 
   return (
