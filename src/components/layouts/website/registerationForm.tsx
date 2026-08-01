@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { User, Mail, Phone, Lock, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import useRegister from "@/hooks/useRegister";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

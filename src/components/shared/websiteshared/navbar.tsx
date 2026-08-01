@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ProductSearch from "./searchbar";
 import Image from "next/image";
 import {
   Select,
@@ -61,7 +62,7 @@ const Navbar = () => {
 
         {/* Search bar */}
         <div className="flex-1 flex items-center max-w-xl relative ">
-          <Search className="w-4 h-4 mr-1 absolute left-3 top-1/2 -translate-y-1/2 " />
+          {/* <Search className="w-4 h-4 mr-1 absolute left-3 top-1/2 -translate-y-1/2 " />
           <Input
             type="text"
             placeholder="Search for products, brands, categories..."
@@ -69,7 +70,8 @@ const Navbar = () => {
           />
           <Button className="rounded-l-none rounded-r-xl p-5 bg-black text-white hover:bg-neutral-700 ">
             Search
-          </Button>
+          </Button> */}
+          <ProductSearch/>
         </div>
 
         {/* Right side icons */}

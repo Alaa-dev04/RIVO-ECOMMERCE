@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "gen:api": "openapi-typescript https://unappeased-krystyna-windowy.ngrok-free.dev/api-docs-json -o ./lib/api/schema.d.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -24,6 +25,7 @@
     "next": "16.2.11",
     "next-auth": "5.0.0-beta.32",
     "next-themes": "^0.4.6",
+    "ngrok": "5.0.0-beta.2",
     "nuqs": "^2.9.2",
     "openapi-fetch": "^0.17.0",
     "openapi-react-query": "^0.5.4",

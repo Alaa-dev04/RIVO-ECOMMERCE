@@ -43,7 +43,7 @@ const useVerifyEmail = () => {
     onSuccess: () => {
       toast.success("Email verified successfully!");
       form.reset();
-      router.push("/home");
+      router.push("/resetpassword");
     },
     onError: () => {
       toast.error("Invalid or expired code.");
