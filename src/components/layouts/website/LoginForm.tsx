@@ -23,7 +23,7 @@ const LoginPage = () => {
         </p>
       </div>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         {/* Email */}
         <div className="space-y-1.5">
           <label htmlFor="email" className="text-sm font-medium">

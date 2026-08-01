@@ -11,12 +11,11 @@ const useLogin = () => {
   const router = useRouter();
 
   const form = useForm<LoginSchemaType>({
-    resolver: zodResolver(LoginSchema ),
-    defaultValues: { 
-      email:"",
-      password:"",
-      phone:"",
-      rememberMe: false,
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false || undefined,
     },
   });
 
@@ -32,9 +31,14 @@ const useLogin = () => {
     },
 
     onSuccess: () => {
-      toast.success("Logged in successfully!");
+      
       form.reset();
-      router.push("/");
+      router.push("/home");
+
+      setTimeout(() => {
+        toast.success("Logged in successfully");
+      }, 200);
+      
     },
 
     onError: () => {
