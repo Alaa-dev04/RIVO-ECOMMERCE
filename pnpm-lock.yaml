@@ -26,6 +26,12 @@ importers:
       '@uidotdev/usehooks':
         specifier: ^2.4.1
         version: 2.4.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      accordion:
+        specifier: ^3.0.2
+        version: 3.0.2
+      add:
+        specifier: ^2.0.9
+        version: 2.0.9
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -35,6 +41,9 @@ importers:
       date-fns:
         specifier: ^4.4.0
         version: 4.4.0
+      dlx:
+        specifier: ^0.2.1
+        version: 0.2.1
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -68,6 +77,9 @@ importers:
       openapi-react-query:
         specifier: ^0.5.4
         version: 0.5.4(@tanstack/react-query@5.101.4(react@19.2.4))(openapi-fetch@0.17.0)
+      pnpm:
+        specifier: ^11.18.0
+        version: 11.18.0
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -81,8 +93,8 @@ importers:
         specifier: ^4.8.0
         version: 4.8.0(react@19.2.4)
       shadcn:
-        specifier: ^4.14.1
-        version: 4.14.1(typescript@5.9.3)
+        specifier: ^4.16.1
+        version: 4.16.1(typescript@5.9.3)
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1133,6 +1145,9 @@ packages:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
     engines: {node: '>= 0.6'}
 
+  accordion@3.0.2:
+    resolution: {integrity: sha512-jbQfFaw+57OBwPt7qSNHuW+RA8smmRwkWRS1Ozh6K/QxUspBgBV/LpdSzlY7vee8TomS6j3D33B9rIeH1qMwsA==}
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1142,6 +1157,9 @@ packages:
     resolution: {integrity: sha512-xRQbDb9BnwDafYNn6Vwl839DYVjqXYb1XVGtWAZ1kcDc6iwAL4hg3B1dZlRiuENFeO2H53gFG3in621AdERVAg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  add@2.0.9:
+    resolution: {integrity: sha512-a6+u7hP0xmII7EBQenAIb6oMp9/vcW6EmrsD0ngUbLnE69Xtwj4yCbmHLUi5LZ6ggJB+AufHTaDbW1XBiYJwFw==}
 
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
@@ -1529,6 +1547,9 @@ packages:
   diff@8.0.4:
     resolution: {integrity: sha512-DPi0FmjiSU5EvQV0++GFDOJ9ASQUVFh5kD+OzOnYdi7n3Wpm9hWWGfB/O2blfHcMVTL5WkQXSnRiK9makhrcnw==}
     engines: {node: '>=0.3.1'}
+
+  dlx@0.2.1:
+    resolution: {integrity: sha512-oXRVvaKG942UX0HNIDr+Eykp6uGhcjkk719dGBYNqSagrwZ0l4ryA4iTh2n/l23MinmXISqzt4uVLSS2cUYm7A==}
 
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
@@ -2821,6 +2842,11 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
+  pnpm@11.18.0:
+    resolution: {integrity: sha512-M9g8d9qC9J+6g2klxvG4QRgewxMrZwY5vQEvcHX1x89jTF+HAUfBmq50ePrAHfCdiJLogEVIlu3SPumzN1dWPA==}
+    engines: {node: '>=22.13'}
+    hasBin: true
+
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
@@ -3023,8 +3049,8 @@ packages:
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
-  shadcn@4.14.1:
-    resolution: {integrity: sha512-Xb4r150oGNexMBxUnWPG1emcaUlFbhzMOJubdA+k0NTkmhgBBycFZjTz9Aw2yQbpDR6QnIZbk234N20s/s7s9A==}
+  shadcn@4.16.1:
+    resolution: {integrity: sha512-XLFzfNNIUPlUlyheFEzj0H4Vnhi9nI0nl3Nfgg8HYXW1FkUVhVT1X+mgmOUW8aWL5SeG0A+yJIV5fm3Hr9MVkQ==}
     engines: {node: '>=20.18.1'}
     hasBin: true
 
@@ -3271,6 +3297,9 @@ packages:
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
+
+  underscore@1.13.8:
+    resolution: {integrity: sha512-DXtD3ZtEQzc7M8m4cXotyHR+FAS18C64asBYY5vqZexfYryNNnDc02W4hKg3rdQuqOYas1jkseX0+nZXjTXnvQ==}
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
@@ -4320,11 +4349,15 @@ snapshots:
       mime-types: 3.0.2
       negotiator: 1.0.0
 
+  accordion@3.0.2: {}
+
   acorn-jsx@5.3.2(acorn@8.17.0):
     dependencies:
       acorn: 8.17.0
 
   acorn@8.17.0: {}
+
+  add@2.0.9: {}
 
   agent-base@7.1.4: {}
 
@@ -4703,6 +4736,10 @@ snapshots:
   detect-libc@2.1.2: {}
 
   diff@8.0.4: {}
+
+  dlx@0.2.1:
+    dependencies:
+      underscore: 1.13.8
 
   doctrine@2.1.0:
     dependencies:
@@ -6101,6 +6138,8 @@ snapshots:
 
   pluralize@8.0.0: {}
 
+  pnpm@11.18.0: {}
+
   possible-typed-array-names@1.1.0: {}
 
   postcss-selector-parser@7.1.4:
@@ -6342,7 +6381,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  shadcn@4.14.1(typescript@5.9.3):
+  shadcn@4.16.1(typescript@5.9.3):
     dependencies:
       '@babel/core': 7.29.7
       '@babel/parser': 7.29.7
@@ -6679,6 +6718,8 @@ snapshots:
       has-bigints: 1.1.0
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
+
+  underscore@1.13.8: {}
 
   undici-types@6.21.0: {}
 
