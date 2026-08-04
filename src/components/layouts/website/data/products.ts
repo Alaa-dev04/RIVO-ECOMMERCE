@@ -1,23 +1,66 @@
-// data/products.ts
+export interface ProductColor {
+  name: string;
+  hex: string;
+}
+
+export interface ProductImage {
+  id: number;
+  url: string;
+}
+
+export interface ProductSpecification {
+  label: string;
+  value: string;
+}
+
+export interface ProductReview {
+  id: number;
+  user: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
+type BundleItem = {
+  id: string;
+  title: string;
+  brand?: string;
+  image: string;
+  price: number;
+  href: string;          // link to that product's page
+  defaultSelected: boolean; // checkbox pre-checked or not (main product is always true/locked)
+};
 
 export interface Product {
   id: number;
   brand: string;
   title: string;
+  frequentlyBoughtTogether?: BundleItem[];
+  // Existing
   image: string;
+
+  // Optional gallery
+  images?: ProductImage[];
+
   price: number;
   oldPrice?: number;
+
   rating: number;
   reviewCount: number;
+
   isFavorite: boolean;
   stock: number;
-  colors?:[];
-  isNew?:string;
-  badges?:[name:string,
-    hex:string
-  ];
-}
 
+  // Existing optional fields
+  colors?: ProductColor[];
+  isNew?: boolean;
+  badges?: string[];
+
+  // New optional fields
+  description?: string;
+  specifications?: ProductSpecification[];
+  reviews?: ProductReview[];
+}
 export const products: Product[] = [
   {
     id: 1,
