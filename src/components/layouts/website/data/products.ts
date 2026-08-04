@@ -11,6 +11,11 @@ export interface Product {
   reviewCount: number;
   isFavorite: boolean;
   stock: number;
+  colors?:[];
+  isNew?:string;
+  badges?:[name:string,
+    hex:string
+  ];
 }
 
 export const products: Product[] = [
@@ -25,6 +30,7 @@ export const products: Product[] = [
     reviewCount: 1124,
     isFavorite: true,
     stock: 15,
+   
   },
   {
     id: 2,

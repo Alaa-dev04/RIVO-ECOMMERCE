@@ -25,7 +25,7 @@ const BrowseByCat = () => {
           {CatData.slice(0, 5).map((category) => (
             <Link
               key={category.slug}
-              href={`/categories/${category.slug}`}
+              href={`/home/categories/${category.slug}`}
               className="group flex w-[140px] shrink-0 snap-start flex-col items-center gap-3 sm:w-[168px]"
             >
               <span
