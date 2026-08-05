@@ -40,7 +40,7 @@ const Navbar = () => {
           href="/home"
           className="text-xl font-extrabold tracking-tight shrink-0 mr-3"
         >
-         <Image src="/logo.png" width={123} height={17} alt="logo"></Image>
+          <Image src="/logo.png" width={123} height={17} alt="logo"></Image>
         </Link>
 
         {/* Category dropdown - hidden on small screens */}
@@ -71,14 +71,18 @@ const Navbar = () => {
           <Button className="rounded-l-none rounded-r-xl p-5 bg-black text-white hover:bg-neutral-700 ">
             Search
           </Button> */}
-          <ProductSearch/>
+          <ProductSearch />
         </div>
 
         {/* Right side icons */}
         <div className="flex items-center gap-4  ml-auto">
-          <button className="hidden sm:flex  ">
-            <Heart size={32} />
-          </button>
+          <Link href="/wishlist">
+         
+            <button className="hidden sm:flex  cursor-pointer">
+              <Heart size={32} />
+            </button>
+          </Link>
+
           <button className=" hidden sm:flex">
             <ShoppingCart size={32} />
           </button>

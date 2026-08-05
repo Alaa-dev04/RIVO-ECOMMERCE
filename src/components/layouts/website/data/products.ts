@@ -21,15 +21,7 @@ export interface ProductReview {
   date: string;
 }
 
-type BundleItem = {
-  id: string;
-  title: string;
-  brand?: string;
-  image: string;
-  price: number;
-  href: string;          // link to that product's page
-  defaultSelected: boolean; // checkbox pre-checked or not (main product is always true/locked)
-};
+import { BundleItem } from "@/components/layouts/website/FBoughtTogheter";
 
 export interface Product {
   id: number;
@@ -44,7 +36,7 @@ export interface Product {
 
   price: number;
   oldPrice?: number;
-
+  IsFreeShipping?: boolean;
   rating: number;
   reviewCount: number;
 
