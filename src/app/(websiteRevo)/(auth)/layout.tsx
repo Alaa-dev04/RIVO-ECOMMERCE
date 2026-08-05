@@ -1,4 +1,5 @@
 import Providers from "@/components/providers/Providers";
+import { ResetPasswordProvider } from "@/components/providers/reset-password-provider";
 export default function WebsiteLayout({
   children,
 }: {
@@ -6,7 +7,11 @@ export default function WebsiteLayout({
 }) {
   return (
     <div className="min-h-full flex flex-col">
-      <Providers> {children}</Providers>
+      <Providers>
+        <ResetPasswordProvider>
+          {children}
+        </ResetPasswordProvider>
+      </Providers>
     </div>
   );
 }

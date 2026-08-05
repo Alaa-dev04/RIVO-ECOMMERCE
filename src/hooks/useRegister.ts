@@ -5,12 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
+import { useSignUp } from "@/zod/auth/mutation";
 import { RegisterSchema, RegisterSchemaType } from "@/zod/registeration";
-
+import { SubmitHandler } from "react-hook-form";
 const useRegister = () => {
   const router = useRouter();
-
+  const { mutate, isPending } = useSignUp();
   const form = useForm<RegisterSchemaType>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -23,39 +23,36 @@ const useRegister = () => {
       terms: false,
     },
   });
-
-  const mutation = useMutation({
-    mutationFn: async (data: RegisterSchemaType) => {
-      // Simulate API request
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      console.log("Register Data:", data);
-
-      // Simulate success response
-      return {
-        message: "User created successfully",
-      };
+const onSubmit: SubmitHandler<RegisterSchemaType> = (values) => {
+  mutate(
+    {
+      FirstName: values.firstName,
+      LastName: values.lastName,
+      email: values.email,
+      phone: values.phone as any,
+      password: values.password,
+      ConfirmPassword: values.confirmPassword,
     },
+    {
+      onSuccess: () => {
+        toast.success("Account created successfully!");
 
-    onSuccess: () => {
-      toast.success("Account created successfully!");
-      form.reset();
-      router.push("/login/email");
-    },
+        form.reset();
 
-    onError: () => {
-      toast.error("Something went wrong.");
-    },
-  });
+        router.push("/register/optregister");
+      },
 
-  const onSubmit = (data: RegisterSchemaType) => {
-    mutation.mutate(data);
-  };
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    }
+  );
+};
 
   return {
     form,
     onSubmit,
-    isPending: mutation.isPending,
+    isPending,
   };
 };
 
