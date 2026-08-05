@@ -29,11 +29,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Product ,products } from "@/components/layouts/website/data/products";
+import { Product, products } from "@/components/layouts/website/data/products";
 import ProductCard from "./productcard";
 import { toast } from "sonner";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import FrequentlyBoughtTogether from "@/components/layouts/website/FBoughtTogheter";
 
 type ProductInfoProps = {
   product: Product;
@@ -285,16 +286,20 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             <div className="flex items-center gap-3 pt-2">
               <Button
                 size="lg"
-                className="flex-1 bg-[#16A34A] hover:bg-[#16A34A]/90"
+                className="flex-1 py-6 bg-[#16A34A] hover:bg-[#16A34A]/90"
                 onClick={() => setNotifyOpen(true)}
               >
                 <Bell className="mr-2 h-4 w-4" />
                 Notify
               </Button>
-              <button onClick={handleFavorite} aria-label="Toggle wishlist">
+              <button
+                onClick={handleFavorite}
+                aria-label="Toggle wishlist"
+                className="border border-[#F97316]/60 p-2 rounded-xl bg-gray-100"
+              >
                 <Heart
                   size={30}
-                  className={`transition ${isFavorite ? "fill-black text-black" : "text-black"}`}
+                  className={`transition ${isFavorite ? "fill-[#F97316] text-[#F97316]/60" : "text-[#F97316]/60"}`}
                 />
               </button>
             </div>
@@ -322,19 +327,24 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </div>
         </div>
 
-        <Dialog open={notifyOpen} onOpenChange={setNotifyOpen}>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
-              <DialogTitle>Stock Notifications</DialogTitle>
-              <DialogDescription>
+          <Dialog open={notifyOpen} onOpenChange={setNotifyOpen}>
+          <DialogContent className="rounded-2xl p-8 sm:max-w-lg">
+            <DialogHeader className="items-center text-center">
+              <DialogTitle className="text-xl font-bold">
+                Stock Notifications
+              </DialogTitle>
+              <DialogDescription className="text-center text-sm leading-relaxed text-muted-foreground">
                 We will notify you as soon as this product is available again.
                 Please enter your email here.
               </DialogDescription>
             </DialogHeader>
-
-            <form onSubmit={handleSubmit(onNotifySubmit)} className="space-y-4">
+ 
+            <form
+              onSubmit={handleSubmit(onNotifySubmit)}
+              className="w-full space-y-4"
+            >
               <div className="space-y-1.5">
-                <label htmlFor="email" className="text-sm font-medium">
+                <label htmlFor="email" className="text-sm font-semibold  ">
                   Email Address <span className="text-[#F97316]">*</span>
                 </label>
                 <div className="relative">
@@ -342,8 +352,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="you@email.com"
-                    className="pl-9"
+                    placeholder="you@example.com"
+                    className="h-11 rounded-lg border-none bg-[#F5F5F5] pl-9 my-2"
                     {...register("email")}
                   />
                 </div>
@@ -353,11 +363,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   </p>
                 )}
               </div>
-
+ 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#16A34A] hover:bg-[#16A34A]/90"
+                className="w-full rounded-lg bg-[#16A34A] py-6 hover:bg-[#16A34A]/90"
               >
                 <Bell className="mr-2 h-4 w-4" />
                 {isSubmitting ? "Notifying..." : "Notify"}
@@ -366,6 +376,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </DialogContent>
         </Dialog>
       </div>{" "}
+      
       <Tabs defaultValue="description" className="mt-10 w-full">
         <TabsList
           variant="line"
@@ -450,16 +461,20 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       </Tabs>
       {/* bought togheter */}
       <div>
-
+        {product.frequentlyBoughtTogether && (
+          <FrequentlyBoughtTogether items={product.frequentlyBoughtTogether} />
+        )}
       </div>
       {/* similar products  */}
       <div>
-        <h1 className="border-l-[#F97316] border-l-5 px-3 my-3 text-2xl">similar products </h1>
+        <h1 className="border-l-[#F97316] border-l-5 px-3 my-3 text-2xl">
+          similar products{" "}
+        </h1>
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-                {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );

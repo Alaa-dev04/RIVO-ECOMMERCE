@@ -21,8 +21,8 @@ const product = {
   reviewCount: 1124,
 
   isFavorite: true,
-  stock: 0,
-
+  stock: 10,
+  IsFreeShipping: true,
   isNew: true,
 
   badges: ["Apple Intelligence", "256GB", "11 inch"],
@@ -62,12 +62,42 @@ const product = {
       date: "2026-07-22",
     },
   ],
+
+  frequentlyBoughtTogether: [
+    {
+      id: "iphone-15-pro-max",
+      title: "Apple iPhone 15 Pro Max 256GB Natural Titanium",
+      image: "/phone1.png",
+      price: 4299,
+      href: "/products/1",
+      defaultSelected: true,
+      freeShip: true,
+    },
+    {
+      id: "iphone-15-pro-max-screen-protector",
+      title: "Tempered Glass Screen Protector for iPhone 15 Pro Max",
+      image: "/screen-protector.png",
+      price: 39,
+      href: "/products/iphone-15-pro-max-screen-protector",
+      defaultSelected: true,
+      freeShip: true,
+    },
+    {
+      id: "apple-magsafe-charger",
+      brand: "Apple",
+      title: "MagSafe Charger (USB-C)",
+      image: "/magsafe-charger.png",
+      price: 249,
+      href: "/products/apple-magsafe-charger",
+      defaultSelected: true,
+    },
+  ],
 };
 
 export default function Page() {
   return (
     <div>
-      <ProductInfo product={product } />
+      <ProductInfo product={product} />
     </div>
   );
 }
