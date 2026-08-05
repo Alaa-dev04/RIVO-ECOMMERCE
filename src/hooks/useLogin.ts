@@ -6,10 +6,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { LoginSchema, LoginSchemaType } from "@/zod/login";
-import { signIn } from "next-auth/react";
+import { useSignIn } from "@/zod/auth/mutation";
+import { SubmitHandler } from "react-hook-form";
 const useLogin = () => {
   const router = useRouter();
-
+  const { mutate, isPending } = useSignIn();
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -19,41 +20,33 @@ const useLogin = () => {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: LoginSchemaType) => {
-      // Simulate API request
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
-      console.log("Login Data:", data);
-
-      // Simulate success response
-      return { message: "Logged in successfully" };
+const onSubmit: SubmitHandler<LoginSchemaType> = (values) => {
+  mutate(
+    {
+      email: values.email,
+      password: values.password,
     },
+    {
+      onSuccess: () => {
+        form.reset();
+        router.push("/home");
 
-    onSuccess: () => {
-      
-      form.reset();
-      router.push("/home");
+        setTimeout(() => {
+          toast.success("Logged in successfully");
+        }, 200);
+      },
+      onError: () => {
+        toast.error("Something went wrong.");
+      },
+    }
+  );
+};
 
-      setTimeout(() => {
-        toast.success("Logged in successfully");
-      }, 200);
-      
-    },
-
-    onError: () => {
-      toast.error("Something went wrong.");
-    },
-  });
-
-  const onSubmit = (data: LoginSchemaType) => {
-    mutation.mutate(data);
-  };
 
   return {
     form,
     onSubmit,
-    isPending: mutation.isPending,
+    isPending,
   };
 };
 export default useLogin;

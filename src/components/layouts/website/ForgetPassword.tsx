@@ -3,13 +3,22 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useForgetPassword } from "@/zod/auth/mutation";
+import { useResetPasswordContext } from "@/components/providers/reset-password-provider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { ArrowLeft, ArrowRight,MoveRight, Mail ,LockKeyhole} from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  MoveRight,
+  Mail,
+  LockKeyhole,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
+///the back end need email using use context
 
 // ---------- Zod Schema ----------
 const ForgotPasswordSchema = z.object({
@@ -25,7 +34,8 @@ type ForgotPasswordSchemaType = z.infer<typeof ForgotPasswordSchema>;
 // ---------- Hook ----------
 const useForgotPassword = () => {
   const router = useRouter();
-
+  const mutation = useForgetPassword();
+  const { setEmail } = useResetPasswordContext();
   const form = useForm<ForgotPasswordSchemaType>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
@@ -33,30 +43,18 @@ const useForgotPassword = () => {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: ForgotPasswordSchemaType) => {
-      // Simulate API request
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
-      console.log("Forgot Password Data:", data);
-
-      // Simulate success response
-      return { message: "Reset code sent successfully" };
-    },
-
-    onSuccess: () => {
-      toast.success("Reset code sent to your email!");
-      form.reset();
-      router.push("/forgetpassword/OTP");
-    },
-
-    onError: () => {
-      toast.error("Something went wrong.");
-    },
-  });
-
   const onSubmit = (data: ForgotPasswordSchemaType) => {
-    mutation.mutate(data);
+    mutation.mutate(data, {
+      onSuccess: (response) => {
+        toast.success(response.message);
+        setEmail(data.email);
+        form.reset();
+        router.push("/forgetpassword/OTP");
+      },
+      onError: (error: Error) => {
+        toast.error(error.message || "Something went wrong.");
+      },
+    });
   };
 
   return {

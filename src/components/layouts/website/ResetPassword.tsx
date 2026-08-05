@@ -4,14 +4,14 @@ import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import {useResetPassword} from "@/zod/auth/mutation"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, ShieldCheck, Lock, Eye, EyeOff, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import { useResetPasswordContext } from "@/components/providers/reset-password-provider";
 // ---------- Zod Schema ----------
 const SetNewPasswordSchema = z
   .object({
@@ -41,32 +41,32 @@ const PASSWORD_RULES = [
 // ---------- Hook ----------
 const useSetNewPassword = () => {
   const router = useRouter();
-
+  const mutation = useResetPassword()
+  const { email } = useResetPasswordContext();
   const form = useForm<SetNewPasswordSchemaType>({
     resolver: zodResolver(SetNewPasswordSchema),
     defaultValues: { password: "", confirmPassword: "" },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: SetNewPasswordSchemaType) => {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      console.log("Set New Password Data:", data);
-      return { message: "Password updated successfully" };
+ const onSubmit = (data: SetNewPasswordSchemaType) => {
+  mutation.mutate(
+    {
+      email,
+      newPassword: data.password,
+      ConfirmPassword: data.confirmPassword,
     },
-    onSuccess: () => {
-      toast.success("Password updated successfully!");
-      form.reset();
-      router.push("/resetpassword/sussesmassage");
-    },
-    onError: () => {
-      toast.error("Something went wrong. Please try again.");
-    },
-  });
-
-  const onSubmit = (data: SetNewPasswordSchemaType) => {
-    mutation.mutate(data);
-  };
-
+    {
+      onSuccess: () => {
+        toast.success("Password updated successfully!");
+        form.reset();
+        router.push("/resetpassword/sussesmassage");
+      },
+      onError: () => {
+        toast.error("Something went wrong. Please try again.");
+      },
+    }
+  );
+};
   return {
     form,
     onSubmit,

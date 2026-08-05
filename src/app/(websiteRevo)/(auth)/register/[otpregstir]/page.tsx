@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -15,7 +16,7 @@ import {
 } from "@/components/ui/input-otp";
 import { SubmitHandler } from "react-hook-form";
 import Countdown from "@/components/shared/CountdownTimer";
-import { useResendOtp, useVerifyPassword } from "@/zod/auth/mutation";
+import { useResendOtp, useVerifyOtp } from "@/zod/auth/mutation";
 
 // ---------- Zod Schema ----------
 const VerifyEmailSchema = z.object({
@@ -29,7 +30,7 @@ type VerifyEmailSchemaType = z.infer<typeof VerifyEmailSchema>;
 // ---------- Hook ----------
 const useVerifyEmail = () => {
   const router = useRouter();
-  const verifyMutation = useVerifyPassword();
+  const verifyMutation = useVerifyOtp();
   const resendMutation = useResendOtp();
   const form = useForm<VerifyEmailSchemaType>({
     resolver: zodResolver(VerifyEmailSchema),
@@ -47,7 +48,7 @@ const useVerifyEmail = () => {
 
           form.reset();
 
-          router.push("/resetpassword");
+          router.push("/login/email");
         },
 
         onError: (error) => {
@@ -94,7 +95,7 @@ const VerifyEmailPage = () => {
     <div className="max-w-[1280px] mx-auto px-6 py-8">
       {/* Back link */}
       <Link
-        href="/forgetpassword"
+        href="/register"
         className="inline-flex items-center gap-2  text-muted-foreground hover:text-foreground transition-colors mb-4"
       >
         <ArrowLeft size={20} />

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
+import { login } from "./lib/api/auth";
 
 type User = {
   id: string;
@@ -8,36 +9,42 @@ type User = {
   password: string;
 };
 
+// auth.ts
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   session: { strategy: "jwt" },
+  callbacks: {
+    ...authConfig.callbacks, // keep your `authorized` callback
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.accessToken = token.accessToken as string;
+      session.user.id = token.id as string;
+      return session;
+    },
+  },
   providers: [
     Credentials({
-      credentials: {
-        email: {},
-        password: {
-            type: "password"
-        },
-      },
+      credentials: { email: {}, password: { type: "password" } },
       authorize: async (credentials) => {
-        const { email, password } = credentials;
-        const user = await getUserByEmail(email as string);
-        if (!user) return null;
-        const passwordsMatch = await comparePasswords(
-          password as string,
-          user.password,
-        );
-
-        if (!passwordsMatch) return null;
-
-        return user;
+        if (!credentials?.email || !credentials?.password) return null;
+        const response = await login({
+          email: credentials.email.toString(),
+          password: credentials.password.toString(),
+        });
+        if (!response?.user) return null;
+        return {
+          id: response.user.id.toString(),
+          email: response.user.email,
+          name: response.user.name,
+          accessToken: response.token,
+        };
       },
     }),
   ],
 });
-async function getUserByEmail(email: string): Promise<User | null> {
-  return null;
-}
-async function comparePasswords(plain: string, hashed: string) {
-  return false;
-}
