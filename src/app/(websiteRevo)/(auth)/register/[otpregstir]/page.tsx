@@ -172,7 +172,7 @@ const VerifyEmailPage = () => {
             <p className="text-xs text-muted-foreground text-center mt-2">
               Wrong email?{" "}
               <Link
-                href="/forgetpassword"
+                href="/register"
                 className="text-[#F97316] font-medium hover:underline"
               >
                 Change it

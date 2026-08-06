@@ -30,20 +30,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     Credentials({
-      credentials: { email: {}, password: { type: "password" } },
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
       authorize: async (credentials) => {
-        if (!credentials?.email || !credentials?.password) return null;
-        const response = await login({
-          email: credentials.email.toString(),
-          password: credentials.password.toString(),
-        });
-        if (!response?.user) return null;
-        return {
-          id: response.user.id.toString(),
-          email: response.user.email,
-          name: response.user.name,
-          accessToken: response.token,
-        };
+        try {
+          console.log("Authorize started");
+
+          if (!credentials?.email || !credentials?.password) {
+            console.log("Missing credentials");
+            return null;
+          }
+
+          const response = await login({
+            email: credentials.email.toString(),
+            password: credentials.password.toString(),
+          });
+
+          console.log("Laravel response:", response);
+
+          if (!response?.user) {
+            console.log("No user in response");
+            return null;
+          }
+
+          return {
+            id: response.user.id.toString(),
+            email: response.user.email,
+            name: response.user.name,
+            accessToken: response.token,
+          };
+        } catch (error) {
+          console.error("Authorize failed:", error);
+          throw error;
+        }
       },
     }),
   ],

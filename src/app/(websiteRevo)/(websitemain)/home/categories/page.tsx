@@ -41,7 +41,7 @@ export default function AllCategories() {
         {CatData.map((category) => (
           <Link
             key={category.id}
-            href={`/categories/${category.slug}`}
+            href={`/home/categories/${category.slug}`}
             className="group flex flex-col items-center text-center"
           >
             <div
