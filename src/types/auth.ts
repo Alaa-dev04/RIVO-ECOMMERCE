@@ -2,12 +2,12 @@
 
 // ---- Requests ----
 export interface RegisterRequest {
-  FirstName: string;
-  LastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phone:number;
+  phone_number: string;
   password: string;
-  ConfirmPassword:string;
+  password_confirmation: string;
 }
 
 export interface VerifyOtpRequest {

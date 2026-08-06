@@ -25,13 +25,13 @@ const useRegister = () => {
   });
 const onSubmit: SubmitHandler<RegisterSchemaType> = (values) => {
   mutate(
-    {
-      FirstName: values.firstName,
-      LastName: values.lastName,
+      {
+      first_name: values.firstName,
+      last_name: values.lastName,
       email: values.email,
-      phone: values.phone as any,
+      phone_number:  "01063853087",
       password: values.password,
-      ConfirmPassword: values.confirmPassword,
+      password_confirmation: values.confirmPassword,
     },
     {
       onSuccess: () => {
