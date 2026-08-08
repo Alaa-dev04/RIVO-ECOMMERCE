@@ -9,10 +9,10 @@ export async function api<T>(
     ...options,
     headers: {
       "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true", // ← add this
       ...options?.headers,
     },
   });
- 
 
   const text = await response.text();
   const data = text ? JSON.parse(text) : null;

@@ -44,24 +44,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return null;
           }
 
-          const response = await login({
-            email: credentials.email.toString(),
-            password: credentials.password.toString(),
-          });
+ const response = await login({
+  email: credentials.email.toString(),
+  password: credentials.password.toString(),
+});
 
-          console.log("Laravel response:", response);
+console.log("Laravel response:", response);
 
-          if (!response?.user) {
-            console.log("No user in response");
-            return null;
-          }
+if (!response?.data?.user) {
+  console.log("No user in response");
+  return null;
+}
 
-          return {
-            id: response.user.id.toString(),
-            email: response.user.email,
-            name: response.user.name,
-            accessToken: response.token,
-          };
+return {
+  id: response.data.user.id.toString(),
+  email: response.data.user.email,
+  name: `${response.data.user.first_name} ${response.data.user.last_name}`,
+  accessToken: response.data.access_token,
+};
         } catch (error) {
           console.error("Authorize failed:", error);
           throw error;

@@ -4,6 +4,9 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 
 import 'react-international-phone/style.css';
+const handleGoogleLogin = () => {
+  window.location.href = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL!;
+};
 const SocialLoginButtons = () => {
 
   return (
@@ -16,9 +19,7 @@ const SocialLoginButtons = () => {
           type="button"
           variant="outline"
           className="w-full h-11 rounded-lg font-medium"
-          onClick={() => {
-            // TODO: wire up Google OAuth
-          }}
+          onClick={handleGoogleLogin}
         >
           <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
             <path
