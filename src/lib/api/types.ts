@@ -1,17 +1,19 @@
 // lib/api/types.ts
 
-// ---- Requests ----
+// ---------- Requests ----------
+
 export interface RegisterRequest {
-  FirstName: string;
-  LastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phone:number;
+  phone_number: string;
   password: string;
-  ConfirmPassword:string;
+  password_confirmation: string;
 }
 
 export interface VerifyOtpRequest {
-  otp: string;
+  user_id: number;
+  otp_code: string;
 }
 
 export interface ResendOtpRequest {
@@ -28,17 +30,35 @@ export interface ForgetPasswordRequest {
 }
 
 export interface VerifyPasswordRequest {
-  otp: string;
+  user_id: number;
+  email: string;
+  otp_code: string;
 }
 
 export interface ResetPasswordRequest {
   email: string;
-  // adjust once we confirm actual field name
   newPassword: string;
-  ConfirmPassword:string;
+  ConfirmPassword: string;
 }
 
-// ---- Responses ----
+// ---------- Responses ----------
+
+export interface RegisterResponse {
+  success: boolean;
+  message: string;
+  data: {
+    user_id: number;
+  };
+}
+
+export interface ForgetPasswordResponse {
+  success: boolean;
+  message: string;
+  data: {
+    user_id: number;
+  };
+}
+
 export interface AuthUser {
   id: string;
   name: string;
@@ -46,8 +66,20 @@ export interface AuthUser {
 }
 
 export interface AuthResponse {
-  user: AuthUser;
-  token?: string; // present only if backend returns a bearer token instead of a cookie
+  success: boolean;
+  message: string;
+  data: {
+    user: {
+      id: number;
+      first_name: string;
+      last_name: string;
+      email: string;
+      phone_number: number;
+      user_created_at: string;
+    };
+    access_token: string;
+    token_type: string;
+  };
 }
 
 export interface MessageResponse {

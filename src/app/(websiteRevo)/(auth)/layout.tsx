@@ -1,4 +1,5 @@
 import Providers from "@/components/providers/Providers";
+import { AuthProvider } from "@/components/providers/auth-provider";
 import { ResetPasswordProvider } from "@/components/providers/reset-password-provider";
 export default function WebsiteLayout({
   children,
@@ -6,11 +7,13 @@ export default function WebsiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-full flex flex-col">
+ <div className="min-h-full flex flex-col">
       <Providers>
-        <ResetPasswordProvider>
-          {children}
-        </ResetPasswordProvider>
+        <AuthProvider>
+          <ResetPasswordProvider>
+            {children}
+          </ResetPasswordProvider>
+        </AuthProvider>
       </Providers>
     </div>
   );

@@ -1,11 +1,13 @@
-// lib/api/auth.ts
 import { api } from "./clients";
+
 import type {
   RegisterRequest,
+  RegisterResponse,
   VerifyOtpRequest,
   ResendOtpRequest,
   LoginRequest,
   ForgetPasswordRequest,
+  ForgetPasswordResponse,
   VerifyPasswordRequest,
   ResetPasswordRequest,
   AuthResponse,
@@ -14,7 +16,7 @@ import type {
 } from "./types";
 
 export const register = (data: RegisterRequest) =>
-  api<MessageResponse>("/api/auth/register", {
+  api<RegisterResponse>("/api/auth/register", {
     method: "POST",
     body: JSON.stringify(data),
   });
@@ -38,7 +40,7 @@ export const login = (data: LoginRequest) =>
   });
 
 export const forgetPassword = (data: ForgetPasswordRequest) =>
-  api<MessageResponse>("/api/auth/forget-password", {
+  api<ForgetPasswordResponse>("/api/auth/forget-password", {
     method: "POST",
     body: JSON.stringify(data),
   });

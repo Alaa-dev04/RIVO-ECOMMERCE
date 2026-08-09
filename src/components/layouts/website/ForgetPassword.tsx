@@ -4,6 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForgetPassword } from "@/zod/auth/mutation";
+import { useAuthContext } from "@/components/providers/auth-provider";
 import { useResetPasswordContext } from "@/components/providers/reset-password-provider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -35,7 +36,8 @@ type ForgotPasswordSchemaType = z.infer<typeof ForgotPasswordSchema>;
 const useForgotPassword = () => {
   const router = useRouter();
   const mutation = useForgetPassword();
-  const { setEmail } = useResetPasswordContext();
+  const { setEmail  } = useResetPasswordContext();
+  const {  setUserId } = useAuthContext();
   const form = useForm<ForgotPasswordSchemaType>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
@@ -48,6 +50,7 @@ const useForgotPassword = () => {
       onSuccess: (response) => {
         toast.success(response.message);
         setEmail(data.email);
+        setUserId(response.data.user_id);
         form.reset();
         router.push("/forgetpassword/OTP");
       },
