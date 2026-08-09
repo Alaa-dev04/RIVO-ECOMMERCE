@@ -82,14 +82,17 @@ const Navbar = () => {
               <Heart size={32} />
             </button>
           </Link>
-
-          <button className=" hidden sm:flex">
+            <Link href="/cart">
+          <button className="hidden sm:flex cursor-pointer">
             <ShoppingCart size={32} />
           </button>
-          <button className="hidden sm:flex ">
+          </Link>
+          <Link href="/home/profile">
+          <button className="hidden sm:flex cursor-pointer">
             <User size={32} />
           </button>
-
+          </Link>
+         
           {/* Language/currency - static UI only */}
           <Select defaultValue="ENG">
             <SelectTrigger className="w-[80px] py-4.5 border-none text-lg shadow-none ">

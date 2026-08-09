@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Pencil,
 } from "lucide-react";
+import Link from "next/link";
 
 // --- Mock data (swap these for real props / API data later) ---
 const user = {
@@ -28,16 +29,16 @@ const stats = [
 ];
 
 const shoppingLinks = [
-  { label: "My Orders", icon: Package, href: "/orders" },
+  { label: "My Orders", icon: Package, href: "/home/profile/orderpage" },
   { label: "Wishlist", icon: Heart, href: "/wishlist" },
   { label: "Cart", icon: ShoppingCart, href: "/cart" },
 ];
 
 const accountLinks = [
-  { label: "Edit Profile", icon: Pencil, href: "/profile/edit" },
-  { label: "Notifications", icon: Bell, href: "/notifications" },
-  { label: "Saved Addresses", icon: MapPin, href: "/addresses" },
-  { label: "Payment Methods", icon: CreditCard, href: "/payment-methods" },
+  { label: "Edit Profile", icon: Pencil, href: "/home/profile/editprofile" },
+  { label: "Notifications", icon: Bell, href: "/home/profile/notifcations" },
+  { label: "Saved Addresses", icon: MapPin, href: "/home/profile/addresses" },
+  { label: "Payment Methods", icon: CreditCard, href: "/home/profile/payment-methods" },
 ];
 
 const supportLinks = [
@@ -118,10 +119,11 @@ export default function ProfilePage() {
                   <p className="text-sm text-gray-500">{user.email}</p>
                 </div>
               </div>
+              <Link href="/home/profile/editprofile">
               <button className="flex items-center gap-1.5 bg-black text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">
                 <Pencil className="w-3.5 h-3.5" />
                 Edit
-              </button>
+              </button></Link>
             </div>
 
             {/* Stats */}
@@ -188,7 +190,7 @@ export default function ProfilePage() {
             <div className="rounded-xl border border-gray-100 p-4">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-sm font-semibold text-gray-800">Recent Orders</p>
-                <a href="/orders" className="text-xs font-medium text-orange-500 hover:underline">
+                <a href="/home/profile/orderpage" className="text-xs font-medium text-orange-500 hover:underline">
                   View all
                 </a>
               </div>

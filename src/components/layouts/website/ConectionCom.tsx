@@ -73,7 +73,7 @@ const NewsletterSignup = () => {
               placeholder="Your email address"
               disabled={isSubmitting}
               {...register("email")}
-              className="w-full rounded-lg border border-gray-700 bg-neutral-900 px-4 py-2.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F97316] disabled:opacity-60"
+              className="w-80% rounded-lg border border-gray-700 bg-neutral-900 px-4 py-2.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F97316] disabled:opacity-60"
             />
             {errors.email && (
               <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>

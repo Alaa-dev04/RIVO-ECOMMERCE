@@ -19,11 +19,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-const pixelifySans = Pixelify_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-pixelify",
-});
+// const pixelifySans = Pixelify_Sans({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700"],
+//   variable: "--font-pixelify",
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${pixelifySans.variable}`}
+      className={`${poppins.variable} `}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
