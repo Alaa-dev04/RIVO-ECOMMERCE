@@ -7,7 +7,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SessionProvider } from "next-auth/react";
-import { Toaster } from "sonner";
+import { Toaster } from "../ui/sonner";
 import Footer from "../shared/websiteshared/footer";
 import Navbar from "@/components/shared/websiteshared/navbar";
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -21,7 +21,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <NuqsAdapter>
-      {/* <SessionProvider> */}
+      <SessionProvider>
         <QueryClientProvider client={queryClient}>
           <Navbar/>
           {children }
@@ -29,7 +29,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-      {/* </SessionProvider> */}
+      </SessionProvider>
     </NuqsAdapter>
   );
 }

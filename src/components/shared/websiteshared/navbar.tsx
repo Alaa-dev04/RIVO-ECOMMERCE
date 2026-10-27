@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ProductSearch from "./searchbar";
 import Image from "next/image";
 import {
   Select,
@@ -39,7 +40,7 @@ const Navbar = () => {
           href="/home"
           className="text-xl font-extrabold tracking-tight shrink-0 mr-3"
         >
-         <Image src="/logo.png" width={123} height={17} alt="logo"></Image>
+          <Image src="/logo.png" width={123} height={17} alt="logo"></Image>
         </Link>
 
         {/* Category dropdown - hidden on small screens */}
@@ -61,7 +62,7 @@ const Navbar = () => {
 
         {/* Search bar */}
         <div className="flex-1 flex items-center max-w-xl relative ">
-          <Search className="w-4 h-4 mr-1 absolute left-3 top-1/2 -translate-y-1/2 " />
+          {/* <Search className="w-4 h-4 mr-1 absolute left-3 top-1/2 -translate-y-1/2 " />
           <Input
             type="text"
             placeholder="Search for products, brands, categories..."
@@ -69,21 +70,29 @@ const Navbar = () => {
           />
           <Button className="rounded-l-none rounded-r-xl p-5 bg-black text-white hover:bg-neutral-700 ">
             Search
-          </Button>
+          </Button> */}
+          <ProductSearch />
         </div>
 
         {/* Right side icons */}
         <div className="flex items-center gap-4  ml-auto">
-          <button className="hidden sm:flex  ">
-            <Heart size={32} />
-          </button>
-          <button className=" hidden sm:flex">
+          <Link href="/wishlist">
+         
+            <button className="hidden sm:flex  cursor-pointer">
+              <Heart size={32} />
+            </button>
+          </Link>
+            <Link href="/cart">
+          <button className="hidden sm:flex cursor-pointer">
             <ShoppingCart size={32} />
           </button>
-          <button className="hidden sm:flex ">
+          </Link>
+          <Link href="/home/profile">
+          <button className="hidden sm:flex cursor-pointer">
             <User size={32} />
           </button>
-
+          </Link>
+         
           {/* Language/currency - static UI only */}
           <Select defaultValue="ENG">
             <SelectTrigger className="w-[80px] py-4.5 border-none text-lg shadow-none ">
